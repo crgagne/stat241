@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Plan}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{fMRI data extraction portion}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Imports}{}% 3
+\BOOKMARK [2][-]{subsubsection.2.0.1}{Get data / Mask / Normalize}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.0.2}{Take A look at Data}{subsubsection.2.0.1}% 5
+\BOOKMARK [3][-]{subsubsection.2.0.3}{Index Image}{subsubsection.2.0.1}% 6
+\BOOKMARK [3][-]{subsubsection.2.0.4}{Graph}{subsubsection.2.0.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.0.5}{Prune Graph}{subsubsection.2.0.1}% 8
+\BOOKMARK [3][-]{subsubsection.2.0.6}{Get Mean Image}{subsubsection.2.0.1}% 9
+\BOOKMARK [3][-]{subsubsection.2.0.7}{ICA}{subsubsection.2.0.1}% 10
+\BOOKMARK [3][-]{subsubsection.2.0.8}{Choose 7 Clusters}{subsubsection.2.0.1}% 11
+\BOOKMARK [3][-]{subsubsection.2.0.9}{K-Means}{subsubsection.2.0.1}% 12
+\BOOKMARK [3][-]{subsubsection.2.0.10}{Add Data to Graph}{subsubsection.2.0.1}% 13
+\BOOKMARK [3][-]{subsubsection.2.0.11}{Add K-means states}{subsubsection.2.0.1}% 14
+\BOOKMARK [3][-]{subsubsection.2.0.12}{Plot Slice of Labels}{subsubsection.2.0.1}% 15
+\BOOKMARK [3][-]{subsubsection.2.0.13}{MRF Functions}{subsubsection.2.0.1}% 16
+\BOOKMARK [3][-]{subsubsection.2.0.14}{Set B and Sample from Potts}{subsubsection.2.0.1}% 17
+\BOOKMARK [2][-]{subsection.2.1}{Use K-means for u-est}{section.2}% 18
+\BOOKMARK [3][-]{subsubsection.2.1.1}{EM}{subsection.2.1}% 19
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Save Brain}{subsection.2.1}% 20

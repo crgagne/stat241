@@ -1,0 +1,874 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Appendix III: Multi-Subject Hierarchical HMM}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{Multi-Subject Potts
+Model}\label{multi-subject-potts-model}
+
+The states of the system z, are assumed be distributed according to a
+Gibbs distribution.
+
+\[ p(Z) = 1/P exp(-U(Z)) \] \[ p(Z) = 1/P exp(-U(Z)) \]
+
+There are nodes in group and nodes in each subjects map.
+
+How to sample from the Potts model.
+
+\[ p(y_s|y_{-s},x) = p(y)/p(x|y_s)p(y_{-s}) \]
+
+Initialize Random States for All Nodes in both group and subject 1.
+sample from group using Gibbs Sampling -
+\[ p(y_s|y_{-s},x) = 1/P exp(-U(Z))\] - where U(Z) in this case is
+\[ U(Z) = \alpha \sum_j \delta(y_j,y_j')  + \beta \sum_n \delta(y_s,y_n)  +\]
+2. sample from each subject using Gibbs Sampling -
+\[ U(Z) = \alpha \delta(y_j,y_j')  + \beta \sum_n \delta(y_s,y_n)  -kux  - logCp \]
+- Only use the liklihood components
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}192}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{scipy.stats}
+          \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{stats}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+          \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{imported}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+imported
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}193}]:} \PY{n}{matplotlib}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Agg}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+          \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.mplot3d} \PY{k+kn}{import} \PY{n}{Axes3D}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.animation} \PY{k+kn}{as} \PY{n+nn}{manimation}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{k+kn}{import} \PY{n+nn}{networkx} \PY{k+kn}{as} \PY{n+nn}{nx}
+          \PY{k}{print}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{imported}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+imported
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/\_\_init\_\_.py:921: UserWarning:  This call to matplotlib.use() has no effect
+because the the backend has already been chosen;
+matplotlib.use() must be called *before* pylab, matplotlib.pyplot,
+or matplotlib.backends is imported for the first time.
+
+  if warn: warnings.warn(\_use\_error\_msg)
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}194}]:} \PY{c}{\PYZsh{}FFMpegWriter  = manimation.writers[\PYZsq{}ffmpeg\PYZsq{}]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}195}]:} \PY{n}{matplotlib}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}195}]:} '1.1.1'
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{n}{matplotlib}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}file\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}196}]:} '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib/\_\_init\_\_.pyc'
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{c}{\PYZsh{} subject Graphs}
+          \PY{c}{\PYZsh{} group Graph}
+          
+          \PY{c}{\PYZsh{} initialize all to random state}
+          
+          \PY{n}{num\PYZus{}states} \PY{o}{=} \PY{l+m+mi}{5}
+          \PY{n}{num\PYZus{}subs} \PY{o}{=} \PY{l+m+mi}{3} \PY{c}{\PYZsh{} CONFUSING INCLUDES GROUP}
+          \PY{n}{nn} \PY{o}{=} \PY{l+m+mi}{6}
+          \PY{n}{B} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{A} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{5}
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Initialize Empty Graph (Random States)}
+          
+          \PY{n}{Group}\PY{o}{=}\PY{n}{nx}\PY{o}{.}\PY{n}{grid\PYZus{}2d\PYZus{}graph}\PY{p}{(}\PY{n}{nn}\PY{p}{,}\PY{n}{nn}\PY{p}{)}  \PY{c}{\PYZsh{}4x4 grid    }
+          \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{:}
+              \PY{n}{state}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+              \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{state}
+          
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{B}
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{A}
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}states}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{num\PYZus{}states}
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{nn}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{nn}
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sub\PYZus{}num}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{group}\PY{l+s}{\PYZsq{}}
+          \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{num\PYZus{}subs}
+          
+          \PY{n}{Graphs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{Graphs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Group}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{sub\PYZus{}num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}subs}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{n}{Sub}\PY{o}{=}\PY{n}{nx}\PY{o}{.}\PY{n}{grid\PYZus{}2d\PYZus{}graph}\PY{p}{(}\PY{n}{nn}\PY{p}{,}\PY{n}{nn}\PY{p}{)}  \PY{c}{\PYZsh{}4x4 grid    }
+              \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{Sub}\PY{o}{.}\PY{n}{node}\PY{p}{:}
+                  \PY{n}{state}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+                  \PY{n}{Sub}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{state}
+          
+              \PY{n}{Sub}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{B}
+              \PY{n}{Sub}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{A}
+              \PY{n}{Sub}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{sub\PYZus{}num}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=} \PY{n}{sub\PYZus{}num}
+              \PY{n}{Sub}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}states}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{num\PYZus{}states}
+              \PY{n}{Sub}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{nn}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{nn}
+              \PY{n}{Graphs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Sub}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+              
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{n}{Graphs}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}198}]:} [<networkx.classes.graph.Graph at 0x111ee9a90>,
+           <networkx.classes.graph.Graph at 0x10a4b5190>,
+           <networkx.classes.graph.Graph at 0x1084caad0>]
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}199}]:} \{'A': 0.5,
+           'B': 1,
+           'name': 'grid\_2d\_graph',
+           'nn': 6,
+           'num\_states': 5,
+           'num\_subs': 3,
+           'sub\_num': 'group'\}
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{graph}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}200}]:} \{'A': 0.5,
+           'B': 1,
+           'name': 'grid\_2d\_graph',
+           'nn': 6,
+           'num\_states': 5,
+           'sub\_num': 0\}
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{edge}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}201}]:} \{(1, 2): \{\}, (2, 1): \{\}, (2, 3): \{\}, (3, 2): \{\}\}
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}202}]:} 3
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{k}{def} \PY{n+nf}{to\PYZus{}str}\PY{p}{(}\PY{n}{state}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{state}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{k}{return}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==}\PY{l+m+mi}{1}\PY{p}{:}
+                  \PY{k}{return}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{r}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==}\PY{l+m+mi}{2}\PY{p}{:}
+                  \PY{k}{return}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{g}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==}\PY{l+m+mi}{3}\PY{p}{:}
+                  \PY{k}{return}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{y}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==}\PY{l+m+mi}{4}\PY{p}{:}
+                  \PY{k}{return}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{w}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \paragraph{Group Energy Function}\label{group-energy-function}
+
+\[ U(Z) = \alpha \sum_j \delta(y_j,y_j')  + \beta \sum_n \delta(y_s,y_n)  +\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}204}]:} array([1, 2, 3])
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{k}{def} \PY{n+nf}{Ug}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{Group} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  
+              \PY{c}{\PYZsh{} if calculating the numerator, use the actual state of the node}
+              \PY{k}{if} \PY{o+ow}{not} \PY{n}{norm}\PY{p}{:}
+                  \PY{n}{z} \PY{o}{=} \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              
+              \PY{c}{\PYZsh{} else use one that is put in }
+              
+              \PY{c}{\PYZsh{} sum up alpha priors. (based on same nodes in each subject graph}
+              \PY{n}{same\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{sub} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{Sub} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}
+                  \PY{k}{if} \PY{n}{z}\PY{o}{!=}\PY{n}{Sub}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{same\PYZus{}voxel\PYZus{}matches}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              \PY{n}{same\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{n}{same\PYZus{}voxel\PYZus{}matches}\PY{o}{*}\PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{A}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          
+              \PY{c}{\PYZsh{} sum up beta priors }
+              \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{edge} \PY{o+ow}{in} \PY{n}{Group}\PY{o}{.}\PY{n}{edge}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{z}\PY{o}{!=}\PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+              \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{*} \PY{n}{Group}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              
+              \PY{n}{U} \PY{o}{=} \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{+}\PY{n}{same\PYZus{}voxel\PYZus{}matches}
+              
+              \PY{k}{return}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+\end{Verbatim}
+
+    \paragraph{Subject Energy Function}\label{subject-energy-function}
+
+\[ U(Z) = \alpha \delta(y_j,y_j')  + \beta \sum_n \delta(y_s,y_n)  -kux  - logCp \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{k}{def} \PY{n+nf}{Us}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{:}
+          
+              \PY{n}{Group} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{Sub} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}
+              
+          
+              \PY{c}{\PYZsh{} if calculating the numerator, use the actual state of the node}
+              \PY{k}{if} \PY{o+ow}{not} \PY{n}{norm}\PY{p}{:}
+                  \PY{n}{z} \PY{o}{=} \PY{n}{Sub}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              
+          
+              
+              \PY{c}{\PYZsh{} alpha prior }
+              \PY{k}{if} \PY{n}{z}\PY{o}{!=}\PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                  \PY{n}{same\PYZus{}voxel\PYZus{}matches}\PY{o}{=}\PY{l+m+mi}{1}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n}{same\PYZus{}voxel\PYZus{}matches}\PY{o}{=}\PY{l+m+mi}{0}
+                  
+              \PY{c}{\PYZsh{} beta prior }
+              \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{edge} \PY{o+ow}{in} \PY{n}{Sub}\PY{o}{.}\PY{n}{edge}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{:}
+                          
+                  \PY{k}{if} \PY{n}{z}\PY{o}{!=}\PY{n}{Sub}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{edge}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+              \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches} \PY{o}{=} \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{*} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{B}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              
+              \PY{n}{U} \PY{o}{=} \PY{n}{neighbor\PYZus{}voxel\PYZus{}matches}\PY{o}{+}\PY{n}{same\PYZus{}voxel\PYZus{}matches}
+              
+              \PY{c}{\PYZsh{} liklihood component }
+              \PY{k}{if} \PY{n}{generative}\PY{o}{==}\PY{n+nb+bp}{False}\PY{p}{:}
+                  \PY{n}{U} \PY{o}{=} \PY{n}{U} \PY{o}{+} \PY{l+m+mi}{1} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} INCOMPLETE}
+                  
+              \PY{k}{return}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+              
+              
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{n}{Sub} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{node} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{k}{for} \PY{n}{edge} \PY{o+ow}{in} \PY{n}{Sub}\PY{o}{.}\PY{n}{edge}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{:}
+              \PY{k}{print}\PY{p}{(}\PY{n}{edge}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1, 2)
+(0, 3)
+(2, 3)
+(1, 4)
+    \end{Verbatim}
+
+    \paragraph{Conditional Probability of Hidden
+States}\label{conditional-probability-of-hidden-states}
+
+\[ p(y_s|y_{-s},x) = \frac{1}{Z} exp(-U(y))\]
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  calculating normalization factor.
+\item
+  Sum over exp(-U(y)) for each possible \[ y \in {1,2,3,4..l} \]
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{k}{def} \PY{n+nf}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+          
+              \PY{n}{num\PYZus{}states} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}states}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              
+              \PY{c}{\PYZsh{} if you do norm, Ug and Us expects a z value (state value) for the numerator }
+              \PY{c}{\PYZsh{} otherwise it grabs the state of the node}
+              
+              \PY{k}{if} \PY{n}{sub} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{c}{\PYZsh{} group graph}
+                  \PY{n}{numerator} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{Ug}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n}{norm}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{z}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{denominator} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{denominator}\PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{Ug}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{state}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{prob} \PY{o}{=} \PY{n}{numerator}\PY{o}{/}\PY{n}{denominator}
+              
+              \PY{k}{else}\PY{p}{:} \PY{c}{\PYZsh{} subject graph}
+                  \PY{n}{numerator} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{Us}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n}{norm}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{z}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n}{generative}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{denominator} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{denominator}\PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{Us}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{state}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n}{generative}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{prob} \PY{o}{=} \PY{n}{numerator}\PY{o}{/}\PY{n}{denominator}
+                  
+              \PY{k}{return}\PY{p}{(}\PY{n}{prob}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Calculate Graph Energy}\label{calculate-graph-energy}
+
+\[ \sum Ug(z) + \sum Us(z) \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{k}{def} \PY{n+nf}{calc\PYZus{}energy}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}\PY{p}{:}
+              \PY{n}{energy} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{sub} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{sub}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{energy}\PY{o}{+}\PY{o}{=}\PY{n}{Ug}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{energy}\PY{o}{+}\PY{o}{=}\PY{n}{Us}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+                  
+                  
+              \PY{k}{return}\PY{p}{(}\PY{n}{energy}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{n}{calc\PYZus{}energy}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:} 385.0
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Plotting The Graphs }
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}graphs}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{true\PYZus{}also}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{plot\PYZus{}conditional}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{:}
+              
+              \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+              \PY{k}{for} \PY{n}{g}\PY{p}{,}\PY{n}{G} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{sca}\PY{p}{(}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{g}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{g} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{group}\PY{l+s}{\PYZsq{}}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{subject}\PY{l+s}{\PYZsq{}}
+                  \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{g}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+                  \PY{n}{pos} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{n}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)} \PY{p}{)}
+                  \PY{n}{labels} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n}{i} \PY{o}{*} \PY{l+m+mi}{10} \PY{o}{+} \PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)} \PY{p}{)}
+                  \PY{k}{if} \PY{n}{plot\PYZus{}conditional}\PY{p}{:}
+                      \PY{c}{\PYZsh{}labels = dict( ((i, j), i * 10 + j) for i, j in G.nodes() )}
+                      \PY{n}{labels} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  
+                  \PY{n}{colors} \PY{o}{=}  \PY{p}{[}\PY{n}{to\PYZus{}str}\PY{p}{(}\PY{n}{G}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)} \PY{p}{]}
+                  \PY{n}{nx}\PY{o}{.}\PY{n}{draw\PYZus{}networkx}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{n}{pos}\PY{o}{=}\PY{n}{pos}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,}\PY{n}{node\PYZus{}color}\PY{o}{=}\PY{n}{colors}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:} 0.038753953809111424
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}213}]:} 0.10534416842024878
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{n}{plot\PYZus{}graphs}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{plot\PYZus{}conditional}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Gibbs Sample from Potts \PYZsh{}\PYZsh{}\PYZsh{}}
+          
+          \PY{n}{num\PYZus{}gibbs\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{200}
+          
+          \PY{n}{num\PYZus{}states} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}states}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{num\PYZus{}subs} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c}{\PYZsh{} stores}
+          \PY{n}{energies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} sample loop }
+          \PY{k}{for} \PY{n}{samples} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}gibbs\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+          
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Group Graph \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+              \PY{c}{\PYZsh{} start with group graph}
+              \PY{n}{Group} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{c}{\PYZsh{} loop through each node, }
+              \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Group}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{conditional\PYZus{}probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+                  \PY{c}{\PYZsh{} calculate conditional probabilty for each possible state (given current states of all else )}
+                  \PY{k}{for} \PY{n}{possible\PYZus{}state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{conditional\PYZus{}probs}\PY{p}{[}\PY{n}{possible\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{possible\PYZus{}state}\PY{p}{)}
+                  
+                  \PY{c}{\PYZsh{} draw new state based on conditional distribution.}
+                  \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Subject Graphs \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} }
+              \PY{c}{\PYZsh{} loop through each subject graph}
+              \PY{k}{for} \PY{n}{sub} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{num\PYZus{}subs}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{conditional\PYZus{}probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+                      \PY{k}{for} \PY{n}{possible\PYZus{}state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{conditional\PYZus{}probs}\PY{p}{[}\PY{n}{possible\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{possible\PYZus{}state}\PY{p}{)}
+                      \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Calcualte Total Energy to Keep Track of Convergence \PYZsh{}\PYZsh{}\PYZsh{} }
+              \PY{n}{energies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{energies}\PY{p}{,}\PY{n}{calc\PYZus{}energy}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}\PY{p}{)}
+              
+                  
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{n}{plot\PYZus{}graphs}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{plot\PYZus{}conditional}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}217}]:} 0.65909122752220761
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}218}]:} \PY{n}{node} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{conditional\PYZus{}probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+          \PY{k}{for} \PY{n}{possible\PYZus{}state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+              \PY{n}{conditional\PYZus{}probs}\PY{p}{[}\PY{n}{possible\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{possible\PYZus{}state}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{,}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}218}]:} <Container object of 5 artists>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{energies}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}219}]:} [<matplotlib.lines.Line2D at 0x104684950>]
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{n}{manimation}\PY{o}{.}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-220-8c5bdff29611>", line 1
+        manimation.
+                   \^{}
+    SyntaxError: invalid syntax
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{FFMpegWriter}  \PY{o}{=} \PY{n}{manimation}\PY{o}{.}\PY{n}{writers}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{ffmpeg}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{metadata} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{test}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{artist}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Matplotlib}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{n}{comment}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{asdf}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{writer} \PY{o}{=} \PY{n}{FFMpegWriter}\PY{p}{(}\PY{n}{fps}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,}\PY{n}{metadata}\PY{o}{=}\PY{n}{metadata}\PY{p}{)}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{l}\PY{p}{,} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{k\PYZhy{}o}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x0}\PY{p}{,} \PY{n}{y0} \PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}
+        \PY{k}{with} \PY{n}{writer}\PY{o}{.}\PY{n}{saving}\PY{p}{(}\PY{n}{fig}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{writer\PYZus{}test.mp4}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x0}\PY{o}{+}\PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{p}{)}
+                \PY{n}{y0}\PY{o}{+}\PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{p}{)}
+                \PY{n}{l}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{y0}\PY{p}{)}
+                \PY{n}{writer}\PY{o}{.}\PY{n}{grab\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{G} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{g} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n}{pos} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{n}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)} \PY{p}{)}
+            \PY{n}{labels} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(} \PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{)}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                
+            \PY{n}{colors} \PY{o}{=}  \PY{p}{[}\PY{n}{to\PYZus{}str}\PY{p}{(}\PY{n}{G}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{G}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)} \PY{p}{]}
+            \PY{n}{nx}\PY{o}{.}\PY{n}{draw\PYZus{}networkx}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{n}{pos}\PY{o}{=}\PY{n}{pos}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,}\PY{n}{node\PYZus{}color}\PY{o}{=}\PY{n}{colors}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{Recover the Graphs?}\label{recover-the-graphs}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{plot\PYZus{}graphs}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{plot\PYZus{}conditional}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} iterative conditional modes}
+          
+          \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} start on last sample from MCMC}
+          \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} start at voxel.. }
+          \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} calcualte energies for each possible states. }
+          \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} choose max .. }
+          
+          \PY{n}{num\PYZus{}gibbs\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{20}
+          
+          \PY{n}{num\PYZus{}states} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}states}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{num\PYZus{}subs} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{graph}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{num\PYZus{}subs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c}{\PYZsh{} stores}
+          \PY{n}{energies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c}{\PYZsh{} sample loop }
+          \PY{k}{for} \PY{n}{samples} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}gibbs\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+          
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Group Graph \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+              \PY{c}{\PYZsh{} start with group graph}
+              \PY{n}{Group} \PY{o}{=} \PY{n}{Graphs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{c}{\PYZsh{} loop through each node, }
+              \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Group}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{conditional\PYZus{}probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+                  \PY{c}{\PYZsh{} calculate conditional probabilty for each possible state (given current states of all else )}
+                  \PY{k}{for} \PY{n}{possible\PYZus{}state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{conditional\PYZus{}probs}\PY{p}{[}\PY{n}{possible\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{possible\PYZus{}state}\PY{p}{)}
+                  
+                  \PY{c}{\PYZsh{} draw new state based on conditional distribution.}
+                  \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state\PYZus{}k+1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}
+                  
+          
+                  
+                  
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Subject Graphs \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} }
+              \PY{c}{\PYZsh{} loop through each subject graph}
+              \PY{k}{for} \PY{n}{sub} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{num\PYZus{}subs}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{conditional\PYZus{}probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}
+                      \PY{k}{for} \PY{n}{possible\PYZus{}state} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}states}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{conditional\PYZus{}probs}\PY{p}{[}\PY{n}{possible\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{conditional\PYZus{}prob\PYZus{}hidden}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{node}\PY{p}{,}\PY{n}{sub}\PY{p}{,}\PY{n}{generative}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{norm}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,}\PY{n}{z}\PY{o}{=}\PY{n}{possible\PYZus{}state}\PY{p}{)}
+                      \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state\PYZus{}k+1}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{conditional\PYZus{}probs}\PY{p}{)}
+                      
+          
+              
+              
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Now actually go through and change it? }
+              \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Group}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{Group}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state\PYZus{}k+1}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+              \PY{k}{for} \PY{n}{sub} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{num\PYZus{}subs}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{node} \PY{o+ow}{in} \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{nodes}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{Graphs}\PY{p}{[}\PY{n}{sub}\PY{p}{]}\PY{o}{.}\PY{n}{node}\PY{p}{[}\PY{n}{node}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{state\PYZus{}k+1}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+                  
+              \PY{c}{\PYZsh{}\PYZsh{}\PYZsh{} Calcualte Total Energy to Keep Track of Convergence \PYZsh{}\PYZsh{}\PYZsh{} }
+              \PY{n}{energies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{energies}\PY{p}{,}\PY{n}{calc\PYZus{}energy}\PY{p}{(}\PY{n}{Graphs}\PY{p}{)}\PY{p}{)}
+              
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{n}{plot\PYZus{}graphs}\PY{p}{(}\PY{n}{Graphs}\PY{p}{,}\PY{n}{plot\PYZus{}conditional}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Final_Project_3_files/Final_Project_3_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
